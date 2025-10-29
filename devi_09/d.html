@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Sop Ayam Pecok Tellu</title>
+
+  <style>
+    :root{
+      --green:#2e7d32;
+      --dark-green:#1e5e24;
+      --warm-yellow:#ffd54f;
+      --bg:#fffaf0;
+      --wood:#7a4b2b;
+      --muted:#6b6b6b;
+      --accent:#e64a19;
+      --card-bg:#fff7ea;
+      --max-width:1100px;
+    }
+
+    /* Reset & base */
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      background: linear-gradient(180deg,var(--bg),#fffefc);
+      color:#222;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      padding:24px 12px;
+      display:flex;
+      justify-content:center;
+    }
+    .wrap{width:100%; max-width:var(--max-width);}
+
+    /* Top bar */
+    .topbar{
+      display:flex;
+      align-items:center;
+      gap:18px;
+      padding:18px 22px;
+      background: linear-gradient(90deg,var(--dark-green),var(--green));
+      color:white;
+      border-radius:12px;
+      box-shadow:0 8px 30px rgba(30,122,46,0.12);
+    }
+    .logo{
+      width:72px;height:72px;border-radius:10px;
+      background:linear-gradient(180deg,var(--warm-yellow),#ffd045);
+      display:flex;align-items:center;justify-content:center;
+      font-weight:900;color:var(--dark-green);font-size:28px;
+      box-shadow:inset 0 -4px 8px rgba(0,0,0,0.06);
+    }
+    .brand h1{margin:0;font-size:22px;letter-spacing:0.4px}
+    .brand p{margin:2px 0 0 0;font-size:13px;opacity:0.95}
+
+    /* Layout grid */
+    .main{
+      margin-top:18px;
+      display:grid;
+      grid-template-columns: 1fr 380px;
+      gap:20px;
+      align-items:start;
+    }
+
+    /* Left column (hero + menu + about) */
+    .hero{
+      border-radius:12px;
+      overflow:hidden;
+      position:relative;
+      background:var(--card-bg);
+      box-shadow:0 8px 24px rgba(0,0,0,0.06);
+    }
+    .hero .media{
+      width:100%; height:360px; overflow:hidden;
+    }
+    .hero .media img{width:100%;height:100%;object-fit:cover;display:block;filter:contrast(1.03) saturate(1.05)}
+    .hero .hero-body{
+      padding:18px 20px;
+      display:flex;
+      gap:16px;
+      align-items:flex-start;
+    }
+    .hero .hero-left{flex:1}
+    .hero h2{margin:0;color:var(--wood); font-size:22px}
+    .hero p.lead{margin:8px 0 12px 0;color:var(--muted)}
+    .hero .actions{display:flex;gap:10px;align-items:center}
+    .btn{
+      display:inline-flex;align-items:center; gap:8px;
+      padding:10px 14px;border-radius:10px;font-weight:800;text-decoration:none;
+      cursor:pointer;
+    }
+    .btn-wa{background:#25d366;color:white; box-shadow:0 8px 22px rgba(37,211,102,0.14)}
+    .btn-menu{background:transparent;border:2px solid var(--green); color:var(--green)}
+
+    /* Menu list */
+    .menu{
+      margin-top:18px;
+      background:white;border-radius:12px;padding:14px; box-shadow:0 6px 18px rgba(0,0,0,0.04);
+    }
+    .menu h3{margin:0 0 12px 0;color:var(--dark-green)}
+    .menu-grid{
+      display:grid;grid-template-columns: repeat(2,1fr);gap:12px;
+    }
+    .dish{
+      background:var(--card-bg);padding:10px;border-radius:10px;display:flex;gap:10px;align-items:center;
+      border:1px solid rgba(0,0,0,0.04);
+    }
+    .dish-thumb{width:78px;height:78px;border-radius:8px;overflow:hidden;flex-shrink:0}
+    .dish-thumb img{width:100%;height:100%;object-fit:cover}
+    .dish-info .name{font-weight:800;color:#2b2b2b}
+    .dish-info .desc{font-size:13px;color:#6b6b6b;margin-top:6px}
+    .dish-right{text-align:right}
+    .price{font-weight:900;color:var(--accent)}
+
+    /* About & Testimonials */
+    .card{background:white;padding:14px;border-radius:12px;box-shadow:0 6px 18px rgba(0,0,0,0.04);margin-top:16px}
+    .card h4{margin:0 0 8px 0;color:var(--dark-green)}
+    .testi-list{display:flex;gap:10px;overflow:auto;padding-bottom:6px}
+    .testi{min-width:200px;background:linear-gradient(180deg,#fff,#fff7f0);padding:10px;border-radius:8px;border:1px solid rgba(0,0,0,0.03)}
+
+    /* Right column (side panel) */
+    .side{
+      position:sticky; top:24px;
+      display:flex;flex-direction:column;gap:14px;
+    }
+    .side .contact{background:linear-gradient(180deg,#fffaf0,#fff);padding:14px;border-radius:12px;border:1px solid rgba(0,0,0,0.03)}
+    .contact .addr{font-weight:800;color:var(--green)}
+    .map{height:220px;border-radius:10px;overflow:hidden;border:1px solid rgba(0,0,0,0.06);margin-top:10px}
+
+    /* Footer actions */
+    .footer-actions{display:flex;gap:10px;align-items:center}
+    .qr{width:84px;height:84px;border-radius:8px;overflow:hidden;border:1px solid rgba(0,0,0,0.06)}
+    .open-wa{display:block;padding:10px 12px;background:var(--green);color:white;border-radius:10px;text-align:center;text-decoration:none;font-weight:800;box-shadow:0 8px 20px rgba(30,122,46,0.12)}
+
+    /* Responsive */
+    @media(max-width:980px){
+      .main{grid-template-columns:1fr; padding-bottom:80px}
+      .hero .media{height:280px}
+      .menu-grid{grid-template-columns:1fr}
+      .side{position:static}
+    }
+
+    /* small flourish */
+    .tag{
+      display:inline-block;background:var(--warm-yellow);color:var(--wood);font-weight:800;padding:6px 10px;border-radius:8px;font-size:13px;
+      box-shadow:0 6px 18px rgba(122,75,43,0.08)
+    }
+  </style>
+</head>
+<body>
+
+  <div class="wrap">
+    <!-- Top bar -->
+    <div class="topbar" role="banner">
+      <div class="logo" aria-hidden="true">🥣</div>
+      <div class="brand">
+        <h1>Sop Ayam Pecok Tellu</h1>
+        <p>Hangat Gurih Bikin Nagih! · Sejak 1982</p>
+      </div>
+      <div style="margin-left:auto;display:flex;gap:10px;align-items:center">
+        <div class="tag">Favorit Khas Jember</div>
+      </div>
+    </div>
+
+    <!-- Main content -->
+    <div class="main" role="main">
+
+      <!-- LEFT -->
+      <div>
+        <!-- HERO -->
+        <section class="hero" aria-labelledby="hero-title">
+          <div class="media">
+            <!-- gunakan file: warung.jpg -->
+            <img src="warung.jpeg" alt="Warung Sop Ayam Pecok Tellu">
+          </div>
+          <div class="hero-body">
+            <div class="hero-left">
+              <h2 id="hero-title">Nikmati Sop Ayam Tradisional, Hangat & Gurih</h2>
+              <p class="lead">Buka setiap hari mulai jam 09.00 — Harga mulai Rp6.000. Datang langsung atau pesan via WhatsApp.</p>
+              <div class="actions">
+                <!-- tombol WA (otomatis pesan) -->
+                <a class="btn btn-wa" id="btnOrderNow" href="#" role="button" aria-label="Pesan via WhatsApp">
+                  <svg width="18" height="18" viewBox="0 0 24 24" style="margin-right:6px">
+                    <path fill="#fff" d="M16.7 7.3a5 5 0 10-9.9 3.6L6 12v2l2.1-.6A5 5 0 0016.7 7.3z"/>
+                  </svg>
+                  Pesan Sekarang via WhatsApp
+                </a>
+                <a class="btn btn-menu" href="#menu" role="button">Lihat Menu</a>
+              </div>
+            </div>
+
+            <div style="width:260px; text-align:right;">
+              <div style="font-weight:800; color:var(--wood); font-size:18px;">Jl. Gajah Mada No.159</div>
+              <div style="font-size:13px;color:var(--muted); margin-top:6px">Kaliwates Kidul, Jember • WA: 0811-3560-280</div>
+              <div style="margin-top:12px">
+                <div style="font-size:13px;color:#444">Jam buka</div>
+                <div style="font-weight:900;color:var(--green)">09.00 — Selesai</div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- MENU -->
+        <section id="menu" class="menu" aria-labelledby="menu-title">
+          <h3 id="menu-title">Menu Andalan</h3>
+
+          <div class="menu-grid">
+            <!-- repeat dish blocks; replace images as noted -->
+            <div class="dish" data-item="Sop Ayam Original" data-price="6000">
+              <div class="dish-thumb"><img src="original.jpeg" alt="Sop Ayam Original"></div>
+              <div class="dish-info">
+                <div class="name">Sop Ayam Original</div>
+                <div class="desc">Kuah bening gurih + suwiran ayam. Porsi reguler.</div>
+              </div>
+              <div class="dish-right">
+                <div class="price">Rp 6.000</div>
+                <div style="margin-top:8px"><a class="open-wa" href="#" data-item="Sop Ayam Original">Pesan</a></div>
+              </div>
+            </div>
+
+            <div class="dish" data-item="Sop Ayam Spesial" data-price="10000">
+              <div class="dish-thumb"><img src="spesial.jpeg" alt="Sop Ayam Spesial"></div>
+              <div class="dish-info">
+                <div class="name">Sop Ayam Spesial</div>
+                <div class="desc">Dengan telur rebus & tambahan daging.</div>
+              </div>
+              <div class="dish-right">
+                <div class="price">Rp 10.000</div>
+                <div style="margin-top:8px"><a class="open-wa" href="#" data-item="Sop Ayam Spesial">Pesan</a></div>
+              </div>
+            </div>
+
+            <div class="dish" data-item="Sop Iga" data-price="33000">
+              <div class="dish-thumb"><img src="sopiga.jpeg" alt="Sop Iga"></div>
+              <div class="dish-info">
+                <div class="name">Sop Iga</div>
+                <div class="desc">Kuah kaldu kuat dengan iga empuk.</div>
+              </div>
+              <div class="dish-right">
+                <div class="price">Rp 33.000</div>
+                <div style="margin-top:8px"><a class="open-wa" href="#" data-item="Sop Iga">Pesan</a></div>
+              </div>
+            </div>
+
+            <div class="dish" data-item="Ayam Gepuk" data-price="15000">
+              <div class="dish-thumb"><img src="gepuk.jpeg" alt="Ayam Gepuk"></div>
+              <div class="dish-info">
+                <div class="name">Ayam Gepuk</div>
+                <div class="desc">Sambal khas + lalapan.</div>
+              </div>
+              <div class="dish-right">
+                <div class="price">Rp 15.000</div>
+                <div style="margin-top:8px"><a class="open-wa" href="#" data-item="Ayam Gepuk">Pesan</a></div>
+              </div>
+            </div>
+
+            <!-- additional menu items (you can add more following same structure) -->
+            <div class="dish" data-item="Sop Ceker" data-price="8000">
+              <div class="dish-thumb"><img src="ceker.jpeg" alt="Sop Ceker"></div>
+              <div class="dish-info">
+                <div class="name">Sop Ceker</div>
+                <div class="desc">Ceker empuk & kuah kaldu mantap.</div>
+              </div>
+              <div class="dish-right">
+                <div class="price">Rp 8.000</div>
+                <div style="margin-top:8px"><a class="open-wa" href="#" data-item="Sop Ceker">Pesan</a></div>
+              </div>
+            </div>
+
+            <div class="dish" data-item="Sop Ayam + Nasi" data-price="9000">
+              <div class="dish-thumb"><img src="food-6.jpg" alt="Sop Ayam + Nasi"></div>
+              <div class="dish-info">
+                <div class="name">Sop Ayam + Nasi</div>
+                <div class="desc">Paket hemat lengkap nasi + sop.</div>
+              </div>
+              <div class="dish-right">
+                <div class="price">Rp 9.000</div>
+                <div style="margin-top:8px"><a class="open-wa" href="#" data-item="Sop Ayam + Nasi">Pesan</a></div>
+              </div>
+            </div>
+
+          </div>
+        </section>
+
+        <!-- ABOUT -->
+        <section class="card" aria-labelledby="about-title">
+          <h4 id="about-title">Tentang Kami</h4>
+          <p style="margin:8px 0 0 0;color:#444">
+            Sop Ayam Pecok Tellu — warung sop ayam keluarga yang sudah berjualan sejak 1982.
+            Resep turun-temurun, kuah gurih, bahan segar — favorit warga Jember.
+          </p>
+        </section>
+
+        <!-- TESTIMONIALS -->
+        <section class="card" aria-labelledby="testi-title">
+          <h4 id="testi-title">Testimoni Pelanggan</h4>
+          <div class="testi-list" aria-live="polite">
+            <div class="testi">
+              <strong>“Enak banget!”</strong>
+              <p style="margin-top:8px;color:#555">Sopnya hangat dan gurih. Porsinya pas. — Siti</p>
+            </div>
+            <div class="testi">
+              <strong>“Favorit keluarga”</strong>
+              <p style="margin-top:8px;color:#555">Datang tiap minggu, selalu puas. — Budi</p>
+            </div>
+            <div class="testi">
+              <strong>“Harga terjangkau”</strong>
+              <p style="margin-top:8px;color:#555">Rasa enak, harga bersahabat. — Rina</p>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <!-- RIGHT (side panel) -->
+      <aside class="side" aria-label="Panel informasi">
+        <div class="contact">
+          <div class="addr">Jl. Gajah Mada No.159, Kaliwates Kidul, Jember</div>
+          <div style="margin-top:8px;color:var(--muted)">WA: <strong>0811-3560-280</strong></div>
+          <div style="margin-top:8px;color:var(--muted)">Jam: 09.00 — Selesai</div>
+
+          <div style="margin-top:12px" class="footer-actions">
+            <!-- QR image placeholder: use file qr-code.png -->
+            <div class="qr"><img src="qr-code.png" alt="QR ke website" style="width:100%;height:100%;object-fit:cover"></div>
+            <a class="open-wa" id="waSide" href="#" style="align-self:center">Chat & Pesan</a>
+          </div>
+
+          <div style="margin-top:12px;font-size:13px;color:#555">
+            <em>Scan QR untuk buka website dengan cepat.</em>
+          </div>
+        </div>
+
+        <div class="map card" aria-hidden="false">
+          <!-- Google Maps iframe — keeps address from your poster -->
+          <iframe
+            src="https://www.google.com/maps?q=Jl.+Gajah+Mada+No.159,+Kaliwates,+Jember&output=embed"
+            title="Lokasi Sop Ayam Pecok Tellu" style="border:0;width:100%;height:100%"></iframe>
+        </div>
+
+      </aside>
+
+    </div> <!-- /main -->
+  </div> <!-- /wrap -->
+
+  <script>
+    // Configuration
+    const WA_NUMBER = "628113560280"; // nomor international (no +)
+    const defaultMsg = "Halo Sop Ayam Pecok Tellu! Saya mau pesan *[ITEM]* 1 porsi. Mohon info estimasi siapnya. Terima kasih.";
+
+    function openWAWithMessage(item){
+      const msg = defaultMsg.replace("[ITEM]", item || "Sop Ayam");
+      const url = "https://wa.me/" + WA_NUMBER + "?text=" + encodeURIComponent(msg);
+      window.open(url, "_blank");
+    }
+
+    // hero button
+    document.getElementById("btnOrderNow").addEventListener("click", function(e){
+      e.preventDefault();
+      openWAWithMessage("Sop Ayam Original");
+    });
+
+    // side panel WA
+    document.getElementById("waSide").addEventListener("click", function(e){
+      e.preventDefault();
+      openWAWithMessage("Sop Ayam Original");
+    });
+
+    // per-dish buttons (delegate)
+    document.querySelectorAll(".open-wa").forEach(btn=>{
+      btn.addEventListener("click", function(e){
+        e.preventDefault();
+        const item = btn.getAttribute("data-item") || btn.closest(".dish")?.getAttribute("data-item") || "Sop Ayam";
+        openWAWithMessage(item);
+      });
+    });
+
+    // optional: make dish thumbs clickable to open larger image (simple)
+    document.querySelectorAll(".dish-thumb img").forEach(img=>{
+      img.style.cursor="pointer";
+      img.addEventListener("click", function(){
+        const win = window.open();
+        win.document.write('<title>Preview</title><img src="'+img.src+'" style="width:100%"/>');
+      });
+    });
+  </script>
+
+</body>
+</html>
